@@ -1,0 +1,83 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block content %}
+
+		<!-- Start Hero Section -->
+			<div class="hero">
+				<div class="container">
+					<div class="row justify-content-between">
+						<div class="col-lg-5">
+							<div class="intro-excerpt">
+								<h1>Shop</h1>
+							</div>
+						</div>
+						<div class="col-lg-7">
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		<!-- End Hero Section -->
+
+		
+
+		<div class="untree_co-section product-section before-footer-section">
+		    <div class="container">
+		      	<div class="row">
+
+		      	
+
+					{% for product in products %}
+					<!-- Start Column 4 -->
+					<div class="col-12 col-md-4 col-lg-3 mb-5">
+						{% if product.image %}
+						<a class="product-item" href="{% url 'product_detail' product.id %}">
+							<img src="/media/{{ product.image}}" alt = "{{product.title}}" class="img-fluid product-thumbnail">
+						{% endif %}
+							<h3 class="product-title">{{ product.name}}</h3>
+							<strong class="product-price">${{ product.price}}</strong>
+
+							<span class="icon-cross">
+								<img src="{% static 'assets/images/cross.svg' %}" class="img-fluid">
+							</span>
+						</a>
+					</div>
+					<!-- End Column 4 -->
+					{% endfor %}
+		      	</div>
+		    </div>
+		</div>
+
+		<!-- Pagination Controls -->
+		<div class="pagination" style="text-align: center; margin: 30px 0;">
+			<ul style="list-style: none; padding: 0; display: inline-flex; flex-wrap: wrap; justify-content: center;">
+				{% if products.has_previous %}
+					<li style="margin: 0 5px;">
+						<a href="?page=1" style="text-decoration: none; color: #007bff; padding: 10px 15px; border: 1px solid #007bff; border-radius: 5px; background: #fff;">First</a>
+					</li>
+					<li style="margin: 0 5px;">
+						<a href="?page={{ products.previous_page_number }}" style="text-decoration: none; color: #007bff; padding: 10px 15px; border: 1px solid #007bff; border-radius: 5px; background: #fff;">Previous</a>
+					</li>
+				{% endif %}
+
+				<li style="margin: 0 5px;">
+					<span style="padding: 10px 15px; border: 1px solid #007bff; border-radius: 5px; background: #f8f9fa;">Page {{ posts.number }} of {{ posts.paginator.num_pages }}</span>
+				</li>
+
+				{% if products.has_next %}
+					<li style="margin: 0 5px;">
+						<a href="?page={{ products.next_page_number }}" style="text-decoration: none; color: #007bff; padding: 10px 15px; border: 1px solid #007bff; border-radius: 5px; background: #fff;">Next</a>
+					</li>
+					<li style="margin: 0 5px;">
+						<a href="?page={{ products.paginator.num_pages }}" style="text-decoration: none; color: #007bff; padding: 10px 15px; border: 1px solid #007bff; border-radius: 5px; background: #fff;">Last</a>
+					</li>
+				{% endif %}
+			</ul>
+		</div>
+		<!-- End Pagination Controls -->
+
+
+
+
+{% endblock  %}
